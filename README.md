@@ -14,7 +14,7 @@
 pip install websocket
 pip install threadpool
 pip install websocket-client
-pip install multiprocessing
+pip install multiprocess
 ```
 
 

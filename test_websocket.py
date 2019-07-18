@@ -23,11 +23,11 @@ def on_message(ws, message):
 
 def on_error(ws, error):
     print(error)
-	 pass
+    pass
 
 def on_close(ws):
     print("### closed ###")
-	 pass
+    pass
 
 def on_open(ws):
     def send_trhead():
