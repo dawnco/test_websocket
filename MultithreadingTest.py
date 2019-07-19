@@ -2,7 +2,6 @@
 #-*- coding:utf-8 -*-
 #__author__ == 'chenmingle'
 
-
 import websocket
 import time
 import threading
@@ -11,11 +10,11 @@ import multiprocessing
 from threadpool import ThreadPool, makeRequests
 
 #修改成自己的websocket地址
-WS_URL = "wss://ws.test.com/"
+WS_URL = "ws://192.168.0.11:9501/" 
 #定义进程数
-processes=5
+processes=3
 #定义线程数（每个文件可能限制1024个，可以修改fs.file等参数）
-thread_num=1000
+thread_num=20
 
 def on_message(ws, message):
      print(message)
@@ -32,7 +31,7 @@ def on_close(ws):
 def on_open(ws):
     def send_trhead():
         #设置你websocket的内容
-        send_info = {"cmd": "refresh", "data": {"room_id": "58", "wx_user_id": 56431}}
+        send_info = {"act": "refresh", "data": "hello1"}
         #每隔10秒发送一下数据使链接不中断
         while True:
             time.sleep(10)
@@ -40,8 +39,6 @@ def on_open(ws):
 
     t = threading.Thread(target=send_trhead)
     t.start()
-
-
 
 def on_start(num):
     time.sleep(num%20)
@@ -52,8 +49,6 @@ def on_start(num):
                                 on_close=on_close)
     ws.on_open = on_open
     ws.run_forever()
-
-
 
 def thread_web_socket():
     #线程池
@@ -66,8 +61,6 @@ def thread_web_socket():
     [pool.putRequest(req) for req in requests]
     pool.wait()
 
-
-
 if __name__ == "__main__":
     #进程池
     pool = multiprocessing.Pool(processes=processes)
@@ -76,4 +69,3 @@ if __name__ == "__main__":
         pool.apply_async(thread_web_socket)
     pool.close()
     pool.join()
-
