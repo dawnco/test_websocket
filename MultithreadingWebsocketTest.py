@@ -2,6 +2,7 @@
 #-*- coding:utf-8 -*-
 #__author__ == 'chenmingle'
 
+import random
 import websocket
 import time
 import threading
@@ -12,9 +13,9 @@ from threadpool import ThreadPool, makeRequests
 #修改成自己的websocket地址
 WS_URL = "ws://192.168.0.11:9501/" 
 #定义进程数
-processes=3
+processes=10
 #定义线程数（每个文件可能限制1024个，可以修改fs.file等参数）
-thread_num=20
+thread_num=10
 
 def on_message(ws, message):
      print(message)
@@ -31,7 +32,7 @@ def on_close(ws):
 def on_open(ws):
     def send_trhead():
         #设置你websocket的内容
-        send_info = {"act": "refresh", "data": "hello1"}
+        send_info = {"act": "refresh", "data": 'hello %s' % random.randint(1, 100)}
         #每隔10秒发送一下数据使链接不中断
         while True:
             time.sleep(10)
