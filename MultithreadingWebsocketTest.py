@@ -1,6 +1,10 @@
 #!/usr/bin/python
 #-*- coding:utf-8 -*-
 #__author__ == 'chenmingle'
+#
+#
+# 结束任务  
+# ps -ef | grep Multithread | grep -v grep | cut -c 9-15 | xargs kill -s 9
 
 import random
 import websocket
@@ -8,7 +12,14 @@ import time
 import threading
 import json
 import multiprocessing
+import signal
+import os
+
 from threadpool import ThreadPool, makeRequests
+
+
+
+
 
 #修改成自己的websocket地址
 WS_URL = "ws://192.168.0.11:9501/" 

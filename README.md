@@ -20,8 +20,12 @@ pip install multiprocess
 
 ### 执行脚本：
 ```
-python test_websocket.py
+python MultithreadingWebsocketTest.py
 ```
 
+### 结束脚本
+```
+[root@localhost ~]# ps -ef | grep Multithread | grep -v grep | cut -c 9-15 | xargs kill -s 9
+```
 
 
